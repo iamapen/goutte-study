@@ -1,0 +1,33 @@
+{
+  "name": "iamapen/goutte-study",
+  "description": "fabpot/goutteの実験",
+  "type": "project",
+  "authors": [
+    {
+      "name": "iamapen",
+      "email": "iamapen@studiopoppy.com"
+    }
+  ],
+  "scripts": {
+    "phpcs": "vendor/bin/phpcs --standard=phpcs-rule.xml src",
+    "phpcbf": "vendor/bin/phpcbf --standard=phpcs-rule.xml src",
+    "post-install-cmd": [
+      "cp _dev/hooks/pre-commit .git/hooks/pre-commit",
+      "chmod +x .git/hooks/pre-commit"
+    ]
+  },
+  "config": {
+    "platform": {
+      "php": "8.3.9"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Acme\\Sample\\": "src/Sample/"
+    }
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.10.2"
+  }
+}

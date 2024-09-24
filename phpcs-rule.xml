@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<ruleset name="poppy">
+  <description>poppy coding standard</description>
+  <arg value="ps"/>
+  <rule ref="PSR12"/>
+  <rule ref="Generic.Files.LineLength">
+    <properties>
+      <property name="lineLimit" value="160"/>
+    </properties>
+  </rule>
+  <!-- 空のphpステートメントを検出 -->
+  <rule ref="Generic.CodeAnalysis.EmptyPHPStatement"/>
+  <!-- 空のステートメントを検出 -->
+  <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+  <!-- 関数呼び出しをforループ内で行うと警告 -->
+  <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+  <!-- ファイルが改行文字で終わっていること -->
+  <rule ref="Generic.Files.EndFileNewline"/>
+
+  <!-- テストコードはキャメルケースを強制しない -->
+  <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+    <exclude-pattern>./tests/*</exclude-pattern>
+  </rule>
+  <!-- array()は使わない、[]を使う -->
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <!-- ""が不要な場合は''に統一する -->
+  <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired">
+    <!-- 変数が存在する場合は""を許可する -->
+    <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+  </rule>
+
+  <rule ref="Squiz.Commenting.FileComment">
+    <!-- スペース数は問わない -->
+    <exclude name="Squiz.Commenting.FileComment.SpacingAfterParamType"/>
+    <!-- パラメタコメントが欠けているのを無視 -->
+    <exclude name="Squiz.Commenting.FileComment.MissingParamComment"/>
+    <!-- ファイルコメントは必須ではない -->
+    <exclude name="Squiz.Commenting.FileComment.Missing"/>
+    <!-- コメント文の末尾をfull stop、"!" や "?" で終わらせる必要はない -->
+    <exclude name="Squiz.Commenting.FileComment.MissingFullStop"/>
+    <!-- 例外コメントの末尾をfull stopで終わらせる必要はない -->
+    <exclude name="Squiz.Commenting.FileComment.ThrowsNoFullStop"/>
+  </rule>
+
+  <rule ref="PSR12.Files.FileHeader">
+    <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+  </rule>
+  <rule ref="PSR2.Classes.PropertyDeclaration">
+    <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+  </rule>
+  <rule ref="PSR2.Methods.MethodDeclaration">
+    <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+  </rule>
+</ruleset>

@@ -1,0 +1,29 @@
+services:
+  php:
+    build:
+        context: .
+        dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/app
+      - ./docker/volumes/php/etc:/usr/local/etc/php
+    working_dir: /app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  #    command: tail -f /dev/null
+  mysql:
+    image: mysql:8.0.28-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: sample_db
+#      MYSQL_USER: app
+#      MYSQL_PASSWORD: app
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/volumes/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    profiles:
+      - manual
+
+volumes:
+  mysql_data:

@@ -1,0 +1,4 @@
+/.idea/
+/*.iml
+/vendor/
+/docker/volumes/php/etc/php.ini

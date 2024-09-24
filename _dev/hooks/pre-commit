@@ -1,0 +1,22 @@
+#!/bin/sh
+
+command_exists () {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Windows 10, Git Bash and Yarn workaround
+if command_exists winpty && test -t 1; then
+  exec < /dev/tty
+fi
+
+
+# stagedされたファイルのみを対象にする
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep \\.php$)
+
+if [ "$STAGED_FILES" != "" ]; then
+  #echo docker compose run --rm php vendor/bin/phpcbf --standard=phpcs-rule.xml $STAGED_FILES
+  docker compose run --rm php vendor/bin/phpcbf --standard=phpcs-rule.xml $STAGED_FILES
+
+  # 修正される可能性があるため再add
+  git add $STAGED_FILES
+fi
