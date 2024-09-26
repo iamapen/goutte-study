@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Acme\\Sample\\": "src/Sample/"
+      "Acme\\": "src/"
     }
   },
   "require-dev": {

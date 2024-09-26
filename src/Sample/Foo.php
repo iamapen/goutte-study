@@ -5,5 +5,4 @@ namespace Acme\Sample;
 
 class Foo
 {
-
 }
